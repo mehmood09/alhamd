@@ -20,10 +20,10 @@ app.use(cors());
 app.use(express.json());
 
 const port= process.env.PORT || 3000;
-const host=process.env.HOST || '0.0.0.0';
+const host=process.env.HTTP_HOST || '0.0.0.0';
 
 async function dbConnection(){
-    const mongoString = process.env.DATABASE_URL;
+    const mongoString = process.env.DATABASE_URI;
     await mongoose.connect(mongoString);
     console.log('Connected to MongoDB Successfully.');
 }
@@ -89,7 +89,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-    res.send("NxB REST API");
+    res.send("Welcome REST API");
 });
 // Here we define its routes in this way
 app.use("/patients", patientRoutes)
